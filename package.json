@@ -3,23 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RemiLisciandra/users-rest-api-js.git"
+    "url": "git+https://github.com/RemiLisciandra/rest-api-with-sequelize.git"
   },
   "author": "Rémi LCD",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RemiLisciandra/users-rest-api-js/issues"
+    "url": "https://github.com/RemiLisciandra/rest-api-with-sequelize/issues"
   },
-  "homepage": "https://github.com/RemiLisciandra/users-rest-api-js#readme",
+  "homepage": "https://github.com/RemiLisciandra/rest-api-with-sequelize#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.2",
+    "date-fns": "^2.29.3",
+    "express": "^4.18.2",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.22"
   }
 }
