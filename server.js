@@ -1,14 +1,31 @@
 import express from 'express';
-import morgan from 'morgan';
 import favicon from 'serve-favicon';
 import bodyParser from "body-parser";
-import { getUsers, addUser, updateUser, patchUser, deleteUser } from './data/userMethods.js';
+import {getUsers, addUser, updateUser, patchUser, deleteUser} from './data/userMethods.js';
+import {Sequelize} from "sequelize";
+import { config as dotenvConfig } from 'dotenv';
 
+// Load environment variables
+dotenvConfig();
+
+// Create an Express server instance and set the listening port
 const server = express();
 const port = 3000;
 
+// Connect to database
+const sequelizeClient = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'postgres',
+    port: process.env.DB_PORT,
+    dialectOptions: {
+        timezone: 'Etc/GMT-2'
+    },
+    logging: false
+});
+sequelizeClient.authenticate().then(_ => console.log('Success')).catch(error => console.error(`Failure : ${error}`));
+
 // Middlewares
-server.use(favicon('favicon.ico')).use(morgan('dev')).use(bodyParser.json());
+server.use(favicon('favicon.ico')).use(bodyParser.json());
 
 // GET methods
 server.get('/api/users/:id', (req, res) => {
@@ -32,7 +49,7 @@ server.post('/api/users', (req, res) => {
 // PUT method
 server.put('/api/users/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const userUpdated = { ...req.body, id: id }
+    const userUpdated = {...req.body, id: id}
     updateUser(id, userUpdated);
     return res.json(userUpdated);
 });
@@ -53,5 +70,5 @@ server.delete('/api/users/:id', (req, res) => {
     return res.json(userDeleted);
 });
 
-// Listen api
+// Expose API
 server.listen(port);

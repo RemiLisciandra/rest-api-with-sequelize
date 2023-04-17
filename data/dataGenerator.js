@@ -22,4 +22,4 @@ const generateUsersList = (count) => {
     return usersList;
 };
 
-export { generateUsersList };
+export {generateUsersList};

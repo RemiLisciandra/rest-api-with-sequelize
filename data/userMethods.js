@@ -1,4 +1,4 @@
-import { generateUsersList } from './dataGenerator.js';
+import {generateUsersList} from './dataGenerator.js';
 
 let usersList = generateUsersList(10);
 
@@ -18,7 +18,7 @@ const patchUser = (id, updatedUser) => {
     let modifiedUser;
     usersList = usersList.map(user => {
         if (user.id === id) {
-            modifiedUser = { ...user, ...updatedUser };
+            modifiedUser = {...user, ...updatedUser};
             return modifiedUser;
         }
         return user;
