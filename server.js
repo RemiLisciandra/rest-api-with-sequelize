@@ -2,27 +2,23 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from "body-parser";
 import {getUsers, addUser, updateUser, patchUser, deleteUser} from './data/userMethods.js';
-import {Sequelize} from "sequelize";
-import { config as dotenvConfig } from 'dotenv';
-
-// Load environment variables
-dotenvConfig();
+import sequelizeClient from "./config/database.js";
+import UserModel from "./src/models/user.js";
 
 // Create an Express server instance and set the listening port
 const server = express();
 const port = 3000;
 
 // Connect to database
-const sequelizeClient = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: 'postgres',
-    port: process.env.DB_PORT,
-    dialectOptions: {
-        timezone: 'Etc/GMT-2'
-    },
-    logging: false
+sequelizeClient.authenticate().then(_ => console.log('Success : connected database')).catch(error => console.error(`Failure : ${error}`));
+sequelizeClient.sync({ force: true }).then(async () => {
+    console.log('Success : created users');
+
+    for (const user of getUsers()) {
+        await UserModel.create(user);
+    }
 });
-sequelizeClient.authenticate().then(_ => console.log('Success')).catch(error => console.error(`Failure : ${error}`));
+
 
 // Middlewares
 server.use(favicon('favicon.ico')).use(bodyParser.json());
