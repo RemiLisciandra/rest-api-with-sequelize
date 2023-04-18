@@ -6,7 +6,6 @@ const generateUser = (id) => {
         fullName: faker.name.fullName(),
         username: faker.internet.userName(),
         email: faker.internet.email(),
-        password: faker.internet.password(),
         age: faker.datatype.number({min: 10, max: 100}),
         picture: faker.image.avatar(),
         cars: [faker.vehicle.vehicle(), faker.vehicle.vehicle()],

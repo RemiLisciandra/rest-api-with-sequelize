@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize';
+import {DataTypes, Model} from 'sequelize';
 
 class User extends Model {}
 
@@ -25,10 +25,6 @@ const initUser = (sequelizeClient) => {
                     isEmail: true,
                 },
             },
-            password: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
             age: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -46,10 +42,10 @@ const initUser = (sequelizeClient) => {
             sequelize: sequelizeClient,
             timestamps: true,
             modelName: 'User',
-            createdAt: 'created',
+            createdAt: true,
             updatedAt: true,
         }
     );
 };
 
-export { User, initUser };
+export {User, initUser};
