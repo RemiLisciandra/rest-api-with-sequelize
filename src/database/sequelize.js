@@ -13,7 +13,7 @@ const sequelizeClient = new Sequelize(process.env.DB_NAME, process.env.DB_USER, 
     dialectOptions: {
         timezone: 'Etc/GMT-2',
     },
-    logging: false,
+    logging: false
 });
 
 // Initialize the User model

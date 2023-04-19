@@ -1,8 +1,7 @@
 import {faker} from '@faker-js/faker';
 
-const generateUser = (id) => {
+const generateUser = () => {
     return {
-        id: id,
         fullName: faker.name.fullName(),
         username: faker.internet.userName(),
         email: faker.internet.email(),
@@ -14,8 +13,8 @@ const generateUser = (id) => {
 
 const generateUsersList = (count) => {
     let usersList = [];
-    for (let i = 1; i <= count; i++) {
-        usersList.push(generateUser(i));
+    for (let i = 1; i <= 10; i++) {
+        usersList.push(generateUser());
     }
     return usersList;
 };

@@ -1,4 +1,4 @@
-import {User} from "../../../models/User.js";
+import {User} from "../../models/User.js";
 
 const getUserById = (server) => {
     server.get("/api/users/:id", async (req, res) => {

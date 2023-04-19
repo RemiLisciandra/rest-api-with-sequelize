@@ -2,8 +2,9 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from "body-parser";
 import {initDb} from "./src/database/sequelize.js";
-import getUsers from "./src/routes/users/get/getUsers.js";
-import getUserById from "./src/routes/users/get/getUserById.js";
+import getUsers from "./src/routes/get/getUsers.js";
+import getUserById from "./src/routes/get/getUserById.js";
+import postUser from "./src/routes/post/postUser.js";
 
 // Create an Express server instance and set the listening port
 const server = express();
@@ -15,9 +16,10 @@ server.use(favicon('favicon.ico')).use(bodyParser.json());
 // Populate database if it is empty
 await initDb();
 
-//
+// HTTP method calls
 getUsers(server);
 getUserById(server);
+postUser(server);
 
 // Expose API
 server.listen(port);
