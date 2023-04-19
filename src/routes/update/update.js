@@ -5,7 +5,13 @@ const updateUser = async (req, res, isFullUpdate) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user) {
-            await user.update(req.body, {fields: isFullUpdate ? undefined : Object.keys(req.body)});
+            let updateOptions;
+            if (isFullUpdate) {
+                updateOptions = { fields: undefined };
+            } else {
+                updateOptions = { fields: Object.keys(req.body) };
+            }
+            await user.update(req.body, updateOptions);
             return res.json(user);
         } else {
             return res.status(404).json({message: "Error : This user does not exist"});

@@ -2,6 +2,7 @@ import {Sequelize} from 'sequelize';
 import {config as dotenvConfig} from 'dotenv';
 import {getUsers} from './data/dataMethods.js';
 import {User, initUser} from '../models/User.js';
+import {initAdmin} from "../models/Admin.js";
 
 // Load environment variables
 dotenvConfig();
@@ -16,8 +17,9 @@ const sequelizeClient = new Sequelize(process.env.DB_NAME, process.env.DB_USER, 
     logging: false
 });
 
-// Initialize the User model
+// Initialize the User and Admin models
 initUser(sequelizeClient);
+initAdmin(sequelizeClient);
 
 const checkAndPopulateTable = async () => {
     // Synchronize the database and create the table if it doesn't exist
