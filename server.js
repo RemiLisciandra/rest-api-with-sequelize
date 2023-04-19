@@ -5,6 +5,7 @@ import {initDb} from "./src/database/sequelize.js";
 import getUsers from "./src/routes/get/getUsers.js";
 import getUserById from "./src/routes/get/getUserById.js";
 import postUser from "./src/routes/post/postUser.js";
+import deleteUser from "./src/routes/delete/deleteUser.js";
 
 // Create an Express server instance and set the listening port
 const server = express();
@@ -20,6 +21,7 @@ await initDb();
 getUsers(server);
 getUserById(server);
 postUser(server);
+deleteUser(server);
 
 // Expose API
 server.listen(port);

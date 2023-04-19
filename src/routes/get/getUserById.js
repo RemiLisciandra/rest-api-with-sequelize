@@ -4,7 +4,7 @@ const getUserById = (server) => {
     server.get("/api/users/:id", async (req, res) => {
         try {
             const user = await User.findByPk(req.params.id);
-            if (user !== null) {
+            if (user) {
                 return res.json(user);
             } else {
                 return res.status(404).json({message: "Error : This user does not exist"});
