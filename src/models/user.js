@@ -1,6 +1,7 @@
 import {DataTypes, Model} from 'sequelize';
 
-class User extends Model {}
+class User extends Model {
+}
 
 const initUser = (sequelizeClient) => {
     User.init(
@@ -8,42 +9,37 @@ const initUser = (sequelizeClient) => {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true,
+                autoIncrement: true
             },
             fullName: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: false
             },
             username: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: false
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    isEmail: true,
-                },
+                allowNull: false
             },
             age: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: false
             },
             picture: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: false
             },
             cars: {
                 type: DataTypes.ARRAY(DataTypes.STRING),
-                allowNull: true,
-            },
+                allowNull: true
+            }
         },
         {
             sequelize: sequelizeClient,
-            timestamps: true,
             modelName: 'User',
-            createdAt: true,
-            updatedAt: true,
+            timestamps: true
         }
     );
 };

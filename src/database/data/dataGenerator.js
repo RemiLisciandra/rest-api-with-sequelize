@@ -8,8 +8,7 @@ const generateUser = (id) => {
         email: faker.internet.email(),
         age: faker.datatype.number({min: 10, max: 100}),
         picture: faker.image.avatar(),
-        cars: [faker.vehicle.vehicle(), faker.vehicle.vehicle()],
-        createdAt: faker.date.between('2023-01-01T00:00:00.000Z', '2024-01-01T00:00:00.000Z'),
+        cars: [faker.vehicle.vehicle(), faker.vehicle.vehicle()]
     };
 };
 
