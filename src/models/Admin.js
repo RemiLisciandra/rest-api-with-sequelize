@@ -1,7 +1,6 @@
-import {DataTypes, Model} from 'sequelize';
+import { DataTypes, Model } from "sequelize";
 
-class Admin extends Model {
-}
+class Admin extends Model {}
 
 const initAdmin = (sequelizeClient) => {
     Admin.init(
@@ -9,24 +8,33 @@ const initAdmin = (sequelizeClient) => {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true
+                autoIncrement: true,
             },
             username: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
                 validate: {
-                    len: [1, 30]
-                }
+                    len: {
+                        args: [1, 30],
+                        msg: "Username must be between 1 and 30 characters.",
+                    },
+                },
             },
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
                 validate: {
-                    isEmail: true,
-                    len: [1, 100]
-                }
+                    isEmail: {
+                        args: true,
+                        msg: "Email must be a valid email address.",
+                    },
+                    len: {
+                        args: [1, 100],
+                        msg: "Email must be between 1 and 100 characters.",
+                    },
+                },
             },
             password: {
                 type: DataTypes.STRING,
@@ -39,19 +47,27 @@ const initAdmin = (sequelizeClient) => {
                         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
                         const hasNumber = /\d/.test(value);
 
-                        if (value.length < minLength || !hasUpperCase || !hasLowerCase || !hasSpecialChar || !hasNumber) {
-                            throw new Error('The password must contain at least 8 characters, one upper case, one lower case, one special character and one number');
+                        if (
+                            value.length < minLength ||
+                            !hasUpperCase ||
+                            !hasLowerCase ||
+                            !hasSpecialChar ||
+                            !hasNumber
+                        ) {
+                            throw new Error(
+                                "The password must contain at least 8 characters, one upper case, one lower case, one special character, and one number."
+                            );
                         }
-                    }
-                }
-            }
+                    },
+                },
+            },
         },
         {
             sequelize: sequelizeClient,
-            modelName: 'Admin',
-            timestamps: true
+            modelName: "Admin",
+            timestamps: true,
         }
     );
 };
 
-export {Admin, initAdmin};
+export { Admin, initAdmin };
