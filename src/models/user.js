@@ -1,6 +1,7 @@
-import { DataTypes, Model } from "sequelize";
+import {DataTypes, Model} from "sequelize";
 
-class User extends Model {}
+class User extends Model {
+}
 
 const initUser = (sequelizeClient) => {
     User.init(
@@ -98,4 +99,4 @@ const initUser = (sequelizeClient) => {
     );
 };
 
-export { User, initUser };
+export {User, initUser};

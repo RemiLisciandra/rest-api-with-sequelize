@@ -1,6 +1,7 @@
-import { DataTypes, Model } from "sequelize";
+import {DataTypes, Model} from "sequelize";
 
-class Admin extends Model {}
+class Admin extends Model {
+}
 
 const initAdmin = (sequelizeClient) => {
     Admin.init(
@@ -70,4 +71,4 @@ const initAdmin = (sequelizeClient) => {
     );
 };
 
-export { Admin, initAdmin };
+export {Admin, initAdmin};
