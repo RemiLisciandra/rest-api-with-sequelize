@@ -11,7 +11,7 @@ const generateUser = () => {
     };
 };
 
-const generateUsersList = (count) => {
+const generateUsersList = () => {
     let usersList = [];
     for (let i = 1; i <= 10; i++) {
         usersList.push(generateUser());

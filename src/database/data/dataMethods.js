@@ -1,9 +1,17 @@
 import {generateUsersList} from './dataGenerator.js';
 
-let usersList = generateUsersList(10);
+let usersList = generateUsersList();
 
 const getUsers = () => {
     return usersList;
 };
 
-export {getUsers};
+const getAdmin = (usernameAdmin, emailAdmin, hashedPassword) => {
+    return {
+        username : usernameAdmin,
+        email: emailAdmin,
+        password : hashedPassword
+    };
+}
+
+export {getUsers, getAdmin};

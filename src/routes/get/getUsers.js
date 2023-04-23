@@ -1,5 +1,5 @@
-import { User } from "../../models/User.js";
-import { Op } from "sequelize";
+import {User} from "../../models/User.js";
+import {Op} from "sequelize";
 
 const getUsers = (server) => {
     server.get("/api/users", async (req, res) => {
@@ -10,7 +10,6 @@ const getUsers = (server) => {
             const offset = parseInt(req.query.offset) || undefined;
             const limit = parseInt(req.query.limit) || undefined;
             const queryConditions = {};
-
             if (searchUsername) {
                 queryConditions.username = {
                     [Op.iLike]: `%${searchUsername}%`,
@@ -25,19 +24,19 @@ const getUsers = (server) => {
                     queryConditions.age[Op.lte] = maxAge;
                 }
             }
-            const { count, rows: users } = await User.findAndCountAll({
+            const {count, rows: users} = await User.findAndCountAll({
                 where: queryConditions,
                 limit: limit,
                 offset: offset,
                 order: [["username", "ASC"]],
             });
             if (!users || users.length === 0) {
-                return res.status(404).json({ message: "No users found" });
+                return res.status(404).json({message: "No users found"});
             }
             const totalUsers = count;
-            return res.json({ totalUsers, users });
+            return res.json({totalUsers, users});
         } catch (error) {
-            return res.status(500).json({ message: "Error : Unable to retrieve user data" });
+            return res.status(500).json({message: "Error : Unable to retrieve user data"});
         }
     });
 };

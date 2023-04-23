@@ -42,17 +42,9 @@ const initAdmin = (sequelizeClient) => {
                 allowNull: false,
                 validate: {
                     isValidPassword(value) {
-                        const minLength = 8;
-                        const hasUpperCase = /[A-Z]/.test(value);
-                        const hasLowerCase = /[a-z]/.test(value);
-                        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
                         const hasNumber = /\d/.test(value);
 
                         if (
-                            value.length < minLength ||
-                            !hasUpperCase ||
-                            !hasLowerCase ||
-                            !hasSpecialChar ||
                             !hasNumber
                         ) {
                             throw new Error(

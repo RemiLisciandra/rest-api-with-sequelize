@@ -9,6 +9,14 @@ import deleteUser from "./src/routes/delete/deleteUser.js";
 import putUser from "./src/routes/update/putUser.js";
 import patchUser from "./src/routes/update/patchUser.js";
 
+// Verify admin credentials are set in environment variables in production
+if (process.env.NODE_ENV === 'production') {
+    if (!process.env.AD_USERNAME || !process.env.AD_EMAIL || !process.env.AD_PASSWORD) {
+        console.error('Admin credentials not set in environment variables. Exiting.');
+        process.exit(1);
+    }
+}
+
 // Create an Express server instance and set the listening port
 const server = express();
 const port = 3000;
