@@ -1,7 +1,8 @@
-import {User} from "../../models/User.js";
+import { User } from "../../models/User.js";
+import authenticateUser from '../../auth/auth.js';
 
 const deleteUser = (server) => {
-    server.delete('/api/users/:id', async (req, res) => {
+    server.delete('/api/users/:id', authenticateUser, async (req, res) => {
         try {
             const user = await User.findByPk(req.params.id);
             if (user) {

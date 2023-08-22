@@ -39,20 +39,7 @@ const initAdmin = (sequelizeClient) => {
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    isValidPassword(value) {
-                        const hasNumber = /\d/.test(value);
-
-                        if (
-                            !hasNumber
-                        ) {
-                            throw new Error(
-                                "The password must contain at least 8 characters, one upper case, one lower case, one special character, and one number."
-                            );
-                        }
-                    },
-                },
+                allowNull: false
             },
         },
         {

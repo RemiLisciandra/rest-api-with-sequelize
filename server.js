@@ -8,6 +8,7 @@ import postUser from "./src/routes/post/postUser.js";
 import deleteUser from "./src/routes/delete/deleteUser.js";
 import putUser from "./src/routes/update/putUser.js";
 import patchUser from "./src/routes/update/patchUser.js";
+import loginUser from "./src/routes/post/loginUser.js";
 
 // Verify admin credentials are set in environment variables in production
 if (process.env.NODE_ENV === 'production') {
@@ -34,6 +35,7 @@ postUser(server);
 putUser(server);
 patchUser(server);
 deleteUser(server);
+loginUser(server);
 
 // Expose API
 server.listen(port);

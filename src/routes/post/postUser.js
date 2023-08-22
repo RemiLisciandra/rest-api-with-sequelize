@@ -1,8 +1,9 @@
-import {User} from "../../models/User.js";
-import {ValidationError, UniqueConstraintError} from "sequelize";
+import { User } from "../../models/User.js";
+import { ValidationError, UniqueConstraintError } from "sequelize";
+import authenticateUser from '../../auth/auth.js';
 
 const postUser = (server) => {
-    server.post("/api/users", async (req, res) => {
+    server.post("/api/users", authenticateUser, async (req, res) => {
         try {
             const user = await User.create(req.body);
             return res.json(user);
